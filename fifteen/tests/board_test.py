@@ -112,3 +112,26 @@ class BoardTest(unittest.TestCase):
         """)
         self.assertEqual(str(expected), str(board))
         
+    def test_iterator(self):
+        board = Board("""
+             1  2  3  4
+             5  6  7  8
+             9 10 11  .
+            13 14 12 15
+        """)
+        actual = []
+        for tile in board:
+            actual.append(tile)
+        expected = [1,2,3,4,5,6,7,8,9,10,11,'.',13,14,12,15]
+        self.assertEqual(expected, actual)
+        
+    def test_get_tile(self):
+        board = Board("""
+             1  2  3  4
+             5  6  7  8
+             9 10 11  .
+            13 14 12 15
+        """)
+        self.assertEqual(1, board[0])
+        self.assertEqual(15, board[15])
+        
