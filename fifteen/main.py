@@ -23,7 +23,7 @@ def main():
          9 10 11  .
         13 14 12 15
     """)
-    board_view = BoardView(board)
+    board_view = BoardView(board, x=50, y=50)
 
     while True:
         for e in pygame.event.get():
