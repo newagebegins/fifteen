@@ -23,7 +23,11 @@ class BoardView:
             if (self._board[i] != '.'):
                 s = str(self._board[i]).rjust(3)
                 text = self._font.render(s, True, self.FONT_COLOR)
-                surface.blit(text, (x, y))
+                surface.blit(text, (x + 1, y + 13))
+                
+            rect = pygame.Rect(x, y, self.TILE_WIDTH, self.TILE_HEIGHT)
+            pygame.draw.rect(surface, self.FONT_COLOR, rect, 1)
+            
             if (i + 1) % Board.SIZE == 0:
                 x = self._x
                 y += self.TILE_HEIGHT
