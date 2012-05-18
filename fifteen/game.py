@@ -43,12 +43,9 @@ class Game:
             clock.tick(30)
             
     def _get_board(self):
-        return Board("""
-             1  2  3  4
-             5  6  7  8
-             9 10 11  .
-            13 14 12 15
-        """)
+        board = Board()
+        board.shuffle()
+        return board
         
     def _should_handle_mouse(self):
         return True

@@ -142,8 +142,8 @@ class BoardTest(unittest.TestCase):
         expected = Board("""
              1  2  3  4
              5  6  7  8
-             9 10 11  .
-            13 14 12 15
+             9 10 11 12
+            13 14  . 15
         """)
         self.assertEqual(str(expected), str(board))
         
@@ -173,4 +173,50 @@ class BoardTest(unittest.TestCase):
              9 10 11 12
             13 14  . 15
         """)
+        self.assertFalse(board.is_solved())
+        
+    def test_is_tile_movable_1(self):
+        board = Board("""
+             1  2  3  4
+             5  6  7  8
+             9 10 11 12
+            13 14  . 15
+        """)
+        self.assertTrue(board.is_tile_movable(15))
+        
+    def test_is_tile_movable_2(self):
+        board = Board("""
+             1  2  3  4
+             5  6  7  8
+             9 10 11 12
+            13 14  . 15
+        """)
+        self.assertFalse(board.is_tile_movable(12))
+        
+    def test_get_movable_tiles_1(self):
+        board = Board("""
+             1  2  3  4
+             5  6  7  8
+             9 10 11 12
+            13 14  . 15
+        """)
+        self.assertEqual([11, 14, 15], board.get_movable_tiles())
+        
+    def test_get_movable_tiles_2(self):
+        board = Board("""
+             1  2  3  4
+             5  6  7  8
+             9 10  . 12
+            13 14 11 15
+        """)
+        self.assertEqual([7, 10, 12, 11], board.get_movable_tiles())
+        
+    def test_shuffle(self):
+        board = Board("""
+             1  2  3  4
+             5  6  7  8
+             9 10 11 12
+            13 14 15  .
+        """)
+        board.shuffle()
         self.assertFalse(board.is_solved())
