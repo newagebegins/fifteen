@@ -31,7 +31,7 @@ class Game:
         board_view = BoardView(board, x=80, y=80)
         board_controller = BoardController(board, board_view)
         game_over_msg = GameOverMessage()
-        play_again_btn = Button(title='Play Again', x=110, y=340)
+        play_again_btn = Button(title='Play Again', x=80, y=340)
         play_again_btn.attach(self)
     
         while True:
