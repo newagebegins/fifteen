@@ -1,10 +1,12 @@
 import sys
 
 import pygame
+from pygame.locals import MOUSEMOTION
 from pygame.locals import QUIT
 
 from fifteen.board import Board
 from fifteen.board_view import BoardView
+from fifteen.board_controller import BoardController
 
 
 WINSIZE = [640, 480]
@@ -24,12 +26,15 @@ def main():
         13 14 12 15
     """)
     board_view = BoardView(board, x=50, y=50)
+    board_controller = BoardController(board, board_view)
 
     while True:
-        for e in pygame.event.get():
-            if e.type == QUIT:
+        for event in pygame.event.get():
+            if event.type == QUIT:
                 pygame.quit()
                 sys.exit()
+            elif event.type == MOUSEMOTION:
+                board_controller.mouse_motion(event.pos)
              
         board_view.draw(backbuffer)
         

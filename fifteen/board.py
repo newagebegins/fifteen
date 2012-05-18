@@ -1,15 +1,22 @@
+from fifteen.tile import Tile
+
+
 class Board:
     SIZE = 4
     TILES_COUNT = SIZE * SIZE
-
-    def __init__(self, s):
-        self._tiles = map(self._convert_tile_to_int, s.split())
+    DEFAULT_BOARD = """
+         1  2  3  4
+         5  6  7  8
+         9 10 11  .
+        13 14 12 15
+    """
+    
+    def __init__(self, s=DEFAULT_BOARD):
+        self._tiles = map(self._create_tile_from_string, s.split())
         self.index = 0
         
-    def _convert_tile_to_int(self, tile):
-        if tile == '.':
-            return tile
-        return int(tile)
+    def _create_tile_from_string(self, s):
+        return Tile(s)
         
     def __str__(self):
         result = ''
@@ -33,9 +40,12 @@ class Board:
     def next(self): #@ReservedAssignment
         if self.index == self.TILES_COUNT:
             raise StopIteration
-        result = self._tiles[self.index]
+        result = self._tiles[self.index].get_value()
         self.index += 1
         return result
 
     def __getitem__(self, index):
         return self._tiles[index]
+    
+    def get_tile(self, row, col):
+        return self._tiles[row * self.SIZE + col]

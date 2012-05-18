@@ -1,5 +1,7 @@
 import unittest
+
 from fifteen.board import Board
+
 
 class BoardTest(unittest.TestCase):
     def test_board_as_string(self):
@@ -125,7 +127,7 @@ class BoardTest(unittest.TestCase):
         expected = [1,2,3,4,5,6,7,8,9,10,11,'.',13,14,12,15]
         self.assertEqual(expected, actual)
         
-    def test_get_tile(self):
+    def test_board_as_array_of_tiles(self):
         board = Board("""
              1  2  3  4
              5  6  7  8
@@ -135,3 +137,22 @@ class BoardTest(unittest.TestCase):
         self.assertEqual(1, board[0])
         self.assertEqual(15, board[15])
         
+    def test_default_constructor(self):
+        board = Board()
+        expected = Board("""
+             1  2  3  4
+             5  6  7  8
+             9 10 11  .
+            13 14 12 15
+        """)
+        self.assertEqual(str(expected), str(board))
+        
+    def test_get_tile(self):
+        board = Board("""
+             1  2  3  4
+             5  6  7  8
+             9 10 11  .
+            13 14 12 15
+        """)
+        self.assertEqual(7, board.get_tile(row=1, col=2))
+        self.assertEqual(15, board.get_tile(row=3, col=3))
