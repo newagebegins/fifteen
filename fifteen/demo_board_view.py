@@ -12,7 +12,9 @@ class DemoBoardView(Game):
         """)
         board.get_tile(0, 0).set_highlight(True)
         return board
-        
+    
+    def _should_handle_mouse(self):
+        return False
         
 if __name__ == '__main__':
     DemoBoardView().run()

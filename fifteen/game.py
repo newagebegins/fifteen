@@ -29,7 +29,7 @@ class Game:
                 if event.type == QUIT:
                     pygame.quit()
                     sys.exit()
-                elif event.type == MOUSEMOTION:
+                elif event.type == MOUSEMOTION and self._should_handle_mouse():
                     board_controller.mouse_motion(event.pos)
             
             backbuffer.fill((0, 0, 0))
@@ -46,3 +46,6 @@ class Game:
              9 10 11  .
             13 14 12 15
         """)
+        
+    def _should_handle_mouse(self):
+        return True

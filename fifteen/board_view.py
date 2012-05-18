@@ -15,6 +15,26 @@ class BoardView:
         self._tile_height = self.FONT_SIZE + 10
         
     def draw(self, surface):
+        self._draw_board(surface)
+        self._draw_tiles(surface)
+                
+    def _draw_board(self, surface):
+        color = (0,255,0)
+        pygame.draw.rect(surface, color, self._get_rect(), 1)
+        
+        for i in range(Board.SIZE):
+            # Horizontal lines.
+            pt_start = (self._x, self._y + self._tile_height * i)
+            pt_end = (self._x + self._get_width() - 1,
+                      self._y + self._tile_height * i)
+            pygame.draw.line(surface, color, pt_start, pt_end)
+            # Vertical lines.
+            pt_start = (self._x + self._tile_width * i, self._y)
+            pt_end = (self._x + self._tile_width * i,
+                      self._y + self._get_height() - 1)
+            pygame.draw.line(surface, color, pt_start, pt_end)\
+            
+    def _draw_tiles(self, surface):
         font = pygame.font.Font(None, self.FONT_SIZE)
         x = self._x
         y = self._y
@@ -22,10 +42,8 @@ class BoardView:
             tile = self._board[i]
             
             rect = pygame.Rect(x, y, self._tile_width, self._tile_height)
-            rect_width = 1
             if tile.is_highlighted():
-                rect_width = 0
-            pygame.draw.rect(surface, (0,255,0), rect, rect_width)
+                pygame.draw.rect(surface, (0,255,0), rect, 0)
             
             if (tile != '.'):
                 s = str(tile).rjust(3)
@@ -37,6 +55,13 @@ class BoardView:
                 y += self._tile_height
             else:
                 x += self._tile_width
+        
+    def _get_rect(self):
+        '''Return a bounding rectangle in which the board resides'''
+        return pygame.Rect(self._x,
+                           self._y,
+                           self._get_width(),
+                           self._get_height())
     
     def set_tile_width(self, width):
         self._tile_width = width
@@ -51,7 +76,7 @@ class BoardView:
 
     def get_tile_at_coords(self, coords):
         x, y = coords
-        if x < self._x or y < self._y or x >= self._x + self._get_width() or y >= self._y + self._get_height():
+        if not self._get_rect().collidepoint(coords):
             return None
         row = (y - self._y) / self._tile_height
         col = (x - self._x) / self._tile_width
