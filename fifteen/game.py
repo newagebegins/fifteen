@@ -31,7 +31,8 @@ class Game:
                     sys.exit()
                 elif event.type == MOUSEMOTION:
                     board_controller.mouse_motion(event.pos)
-                 
+            
+            backbuffer.fill((0, 0, 0))
             board_view.draw(backbuffer)
             
             screen.blit(backbuffer, (0, 0))

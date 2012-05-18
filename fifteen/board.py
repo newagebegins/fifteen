@@ -40,7 +40,7 @@ class Board:
     def next(self): #@ReservedAssignment
         if self.index == self.TILES_COUNT:
             raise StopIteration
-        result = self._tiles[self.index].get_value()
+        result = self._tiles[self.index]
         self.index += 1
         return result
 
