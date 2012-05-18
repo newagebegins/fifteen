@@ -156,3 +156,21 @@ class BoardTest(unittest.TestCase):
         """)
         self.assertEqual(7, board.get_tile(row=1, col=2))
         self.assertEqual(15, board.get_tile(row=3, col=3))
+        
+    def test_is_solved(self):
+        board = Board("""
+             1  2  3  4
+             5  6  7  8
+             9 10 11 12
+            13 14 15  .
+        """)
+        self.assertTrue(board.is_solved())
+        
+    def test_is_not_solved(self):
+        board = Board("""
+             1  2  3  4
+             5  6  7  8
+             9 10 11 12
+            13 14  . 15
+        """)
+        self.assertFalse(board.is_solved())

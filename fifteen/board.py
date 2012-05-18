@@ -49,3 +49,12 @@ class Board:
     
     def get_tile(self, row, col):
         return self._tiles[row * self.SIZE + col]
+    
+    def is_solved(self):
+        solved_board = Board("""
+             1  2  3  4
+             5  6  7  8
+             9 10 11 12
+            13 14 15  .
+        """)
+        return str(self) == str(solved_board)
