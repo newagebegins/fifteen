@@ -55,3 +55,24 @@ class BoardControllerTest(unittest.TestCase):
         controller.mouse_motion(mouse_position)
         self.assertFalse(board.get_tile(**TILE_POS_1).is_highlighted())
         self.assertTrue(board.get_tile(**TILE_POS_2).is_highlighted())
+        
+    def test_mouse_click__should_move_tile(self):
+        board = Board("""
+             1  2  3  4
+             5  6  7  8
+             9 10 11  .
+            13 14 12 15
+        """)
+        view = BoardView(board)
+        controller = BoardController(board, view)
+        mouse_position = view.get_screen_coords_of_tile(row=3, col=3)
+        
+        controller.mouse_click(mouse_position)
+        
+        expected = Board("""
+             1  2  3  4
+             5  6  7  8
+             9 10 11 15
+            13 14 12  .
+        """)
+        self.assertEqual(str(expected), str(board))

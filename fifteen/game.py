@@ -1,6 +1,7 @@
 import sys
 
 import pygame
+from pygame.locals import MOUSEBUTTONDOWN
 from pygame.locals import MOUSEMOTION
 from pygame.locals import QUIT
 
@@ -31,6 +32,8 @@ class Game:
                     sys.exit()
                 elif event.type == MOUSEMOTION and self._should_handle_mouse():
                     board_controller.mouse_motion(event.pos)
+                elif event.type == MOUSEBUTTONDOWN and self._should_handle_mouse():
+                    board_controller.mouse_click(event.pos)
             
             backbuffer.fill((0, 0, 0))
             board_view.draw(backbuffer)
