@@ -7,5 +7,5 @@ To run the game you need [pygame](http://pygame.org) installed on your system.
 To install dependencies on Ubuntu: `sudo apt-get install python-pygame`  
 To actually run the game: `python play_fifteen.py`
 
-Screenshot:
+A screenshot:  
 ![Screenshot of the Fifteen game](screenshot.png)
